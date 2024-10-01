@@ -9,6 +9,7 @@ const categoryImages = {
   'Acomodações sustentáveis': require('../assets/acomodacoes.jpg')
 };
 
+/*Essas imagens precisam ser trocadas SP */
 const destinationImages = {
   'Alto Ribeira': require('../assets/alto.jpg'),
   'Atibaia': require('../assets/atibaia.jpg')
@@ -38,7 +39,7 @@ const InicialTour = ({ navigation }) => {
       <LinearGradient colors={['#4CAF50', '#2E7D32']} style={styles.header}>
         <Text style={styles.headerTitle}>TourGuide</Text>
         <View style={styles.headerIcons}>
-          <TouchableOpacity onPress={() => {/* Adicionar funcionalidade de filtro */}} style={styles.headerIcon}>
+          <TouchableOpacity onPress={() => navigation.navigate('Filtros')} style={styles.headerIcon}>
             <Icon name="filter" size={24} color="#fff" />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => setIsProfileVisible(true)} style={styles.headerIcon}>
@@ -58,7 +59,7 @@ const InicialTour = ({ navigation }) => {
         </View>
 
         <View style={styles.categoriesHeader}>
-          <Text style={styles.sectionTitle}>CATEGORIAS</Text>
+          <Text style={styles.sectionTitle}>Destinos</Text>
           <TouchableOpacity onPress={() => navigation.navigate('Categorias')}>
           <Text style={styles.seeAllText}>Ver todas</Text>
         </TouchableOpacity>
@@ -75,7 +76,7 @@ const InicialTour = ({ navigation }) => {
           ))}
         </ScrollView>
 
-        <Text style={styles.sectionTitle}>Destinos em destaque</Text>
+        <Text style={styles.sectionTitle}>Recomendações de destinos</Text>
 
         <View style={styles.destinationsContainer}>
           {Object.keys(destinationImages).map((place, index) => (
@@ -102,6 +103,7 @@ const InicialTour = ({ navigation }) => {
         </ScrollView>
       </ScrollView>
 
+      /* */
       <View style={styles.footer}>
         {['home', 'map', 'bell', 'user'].map((icon, index) => (
           <TouchableOpacity key={index} style={styles.footerButton}>

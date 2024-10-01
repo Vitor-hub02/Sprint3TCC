@@ -18,6 +18,11 @@ import RedefinirSenha from './src/Components/RedefinirSenha';
 import InicialTour from './src/Components/InicialTour';
 import Categorias from './src/Components/Categorias';
 import BuscaLocais from './src/Components/BuscaLocais';
+import Filtros from './src/Components/Filtros';
+import FiltroMeioTransporte from './src/Components/FiltroMeioTransporte';
+import EscolherRota from './src/Components/EscolherRota';
+import TipoTurismo from './src/Components/TipoTurismo';
+import AltoRibeira from './src/Components/AltoRibeira';
 // Importando as novas telas
 
 
@@ -52,6 +57,11 @@ function App() {
         <Stack.Screen name="InicialTour" component={InicialTour} />
         <Stack.Screen name="Categorias" component={Categorias} />
         <Stack.Screen name="BuscaLocais" component={BuscaLocais} />
+        <Stack.Screen name="Filtros" component={Filtros} />
+        <Stack.Screen name="FiltroMeioTransporte" component={FiltroMeioTransporte} />
+        <Stack.Screen name="EscolherRota" component={EscolherRota} />
+        <Stack.Screen name="TipoTurismo" component={TipoTurismo} />
+        <Stack.Screen name="AltoRibeira" component={AltoRibeira} />
       </Stack.Navigator>
     </NavigationContainer>
   );
