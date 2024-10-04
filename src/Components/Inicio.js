@@ -15,7 +15,7 @@ export default function Inicio({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity
         style={styles.orText}
-        onPress={() => navigation.navigate('Login')}
+        onPress={() => navigation.navigate('EscolherPreferencias1')}
         >
         <Text style={styles.skipText}>Pular apresentação</Text>
         </TouchableOpacity>
