@@ -22,7 +22,6 @@ import Filtros from './src/Components/Filtros';
 import FiltroMeioTransporte from './src/Components/FiltroMeioTransporte';
 import EscolherRota from './src/Components/EscolherRota';
 import TipoTurismo from './src/Components/TipoTurismo';
-import AltoRibeira from './src/Components/AltoRibeira';
 import EscolherPreferencias1 from './src/Components/EscolherPreferencias1';
 import EscolherPreferencias2 from './src/Components/EscolherPreferencias2';
 import EscolherPreferencias3 from './src/Components/EscolherPreferencias3';
@@ -64,7 +63,6 @@ function App() {
         <Stack.Screen name="FiltroMeioTransporte" component={FiltroMeioTransporte} />
         <Stack.Screen name="EscolherRota" component={EscolherRota} />
         <Stack.Screen name="TipoTurismo" component={TipoTurismo} />
-        <Stack.Screen name="AltoRibeira" component={AltoRibeira} />
         <Stack.Screen name="EscolherPreferencias1" component={EscolherPreferencias1} />
         <Stack.Screen name="EscolherPreferencias2" component={EscolherPreferencias2} />
         <Stack.Screen name="EscolherPreferencias3" component={EscolherPreferencias3} />
