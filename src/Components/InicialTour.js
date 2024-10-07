@@ -11,8 +11,8 @@ const categoryImages = {
 
 /*Essas imagens precisam ser trocadas SP */
 const destinationImages = {
-  'Alto Ribeira': require('../assets/alto.jpg'),
-  'Atibaia': require('../assets/atibaia.jpg')
+  'Parque Ibirapuera': require('../assets/ParqueIbirapuera.jpg'),
+  'Aquário de São Paulo': require('../assets/Aquario.jpg')
 };
 
 const experienceImages = {
@@ -80,7 +80,17 @@ const InicialTour = ({ navigation }) => {
 
         <View style={styles.destinationsContainer}>
           {Object.keys(destinationImages).map((place, index) => (
-            <TouchableOpacity key={index} style={styles.destinationItem}>
+            <TouchableOpacity 
+              key={index} 
+              style={styles.destinationItem} 
+              onPress={() => {
+                if (place === 'Parque Ibirapuera') {
+                  navigation.navigate('ParqueIbirapuera'); // Navega para ParqueIbirapuera.js
+                } else if (place === 'Aquário de São Paulo') {
+                  navigation.navigate('Aquario'); // Navega para Aquario.js
+                }
+              }}
+            >
               <Image source={destinationImages[place]} style={styles.destinationImage} />
               <LinearGradient colors={['transparent', 'rgba(0,0,0,0.8)']} style={styles.destinationGradient}>
                 <Text style={styles.destinationTitle}>{place}</Text>

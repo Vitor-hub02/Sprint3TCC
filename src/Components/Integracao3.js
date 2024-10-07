@@ -6,7 +6,7 @@ const AUTO_CHANGE_INTERVAL = 2000;
 export default function Integracao1({ navigation }) {
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.navigate('Login');
+      navigation.navigate('EscolherPreferencias1');
     }, AUTO_CHANGE_INTERVAL);
 
     return () => clearTimeout(timer);
