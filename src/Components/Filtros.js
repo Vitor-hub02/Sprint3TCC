@@ -35,7 +35,10 @@ const Filtros = ({ navigation, route }) => {
         </View>
       </TouchableOpacity>
       
-      <TouchableOpacity style={styles.applyButton}>
+      <TouchableOpacity 
+        style={styles.applyButton}
+        onPress={() => navigation.navigate('InicialTour')}
+      >
         <Text style={styles.applyButtonText}>Aplicar filtros</Text>
       </TouchableOpacity>
     </View>

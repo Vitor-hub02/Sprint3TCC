@@ -103,7 +103,6 @@ const InicialTour = ({ navigation }) => {
         </ScrollView>
       </ScrollView>
 
-      /* */
       <View style={styles.footer}>
         {['home', 'map', 'bell', 'user'].map((icon, index) => (
           <TouchableOpacity key={index} style={styles.footerButton}>
