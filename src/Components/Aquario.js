@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
-import { View, Text, StyleSheet, Button, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; 
 
-const ParqueIbirapuera = () => {
+const Aquario = () => {
   const scrollViewRef = useRef();
 
   const scrollToOptions = () => {
@@ -11,27 +11,27 @@ const ParqueIbirapuera = () => {
 
   const options = [
     {
-      title: "Passeio para conhecer o Museu de Arte Moderna",
-      price: "a partir de R$ 10,00 por pessoa",
-      image: require('../assets/museuArte.jpeg'),
+      title: "Recinto dos Ursos Polares",
+      price: "Pago apenas o ingresso de R$90,00 do Aquário",
+      image: require('../assets/RecintoUrsos.jpeg'),
       rating: 1000,
     },
     {
-      title: "Visitar o Planetário Professor Aristóteles Orsini",
-      price: "a partir de R$ 5,00 por pessoa",
-      image: require('../assets/PlanetarioIbira.jpeg'), 
+      title: "O Mergulho das Sereias",
+      price: "Verificar disponibilidade",
+      image: require('../assets/MergulhoSereias.jpg'), 
       rating: 250,
     },
     {
-      title: "Visitar o Viveiro Manequinho Lopes",
+      title: "Tanque dos Tubarões",
       price: "Gratuito",
-      image: require('../assets/ViveroIbira.jpeg'), 
+      image: require('../assets/TanqueTubarao.jpeg'), 
       rating: 345,
     },
     {
-      title: "Aproveitar a ciclofaixas",
+      title: "Setor Africa",
       price: "Gratuito",
-      image: require('../assets/CiclofaixaIbira.jpg'), 
+      image: require('../assets/SetorAfrica.jpeg'), 
       rating: 256,
     },
   ];
@@ -40,10 +40,10 @@ const ParqueIbirapuera = () => {
     <ScrollView ref={scrollViewRef} style={styles.container}>
       <View style={styles.header}>
         <Image 
-          source={require('../assets/ParqueIbirapuera.jpg')} 
+          source={require('../assets/Aquario.jpg')} 
           style={styles.headerImage} 
         />
-        <Text style={styles.title}>Parque Ibirapuera - São Paulo</Text>
+        <Text style={styles.title}>Aquario - São Paulo</Text>
         <Text style={styles.info}>Aberto agora: 5:00 - 0:00</Text>
       </View>
 
@@ -65,7 +65,7 @@ const ParqueIbirapuera = () => {
 
       <View style={styles.spacing} />
 
-      <Text style={styles.sectionTitle}>Principais maneiras de aproveitar o Parque Ibirapuera</Text>
+      <Text style={styles.sectionTitle}>Principais maneiras de aproveitar o Aquário</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.optionsContainer}>
         {options.map((option, index) => (
           <TouchableOpacity key={index} style={styles.optionItem}>
@@ -178,4 +178,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ParqueIbirapuera;
+export default Aquario;

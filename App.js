@@ -26,6 +26,7 @@ import EscolherPreferencias1 from './src/Components/EscolherPreferencias1';
 import EscolherPreferencias2 from './src/Components/EscolherPreferencias2';
 import EscolherPreferencias3 from './src/Components/EscolherPreferencias3';
 import ParqueIbirapuera from './src/Components/ParqueIbirapuera';
+import Aquario from './src/Components/Aquario';
 // Importando as novas telas
 
 
@@ -68,6 +69,7 @@ function App() {
         <Stack.Screen name="EscolherPreferencias2" component={EscolherPreferencias2} />
         <Stack.Screen name="EscolherPreferencias3" component={EscolherPreferencias3} />
         <Stack.Screen name="ParqueIbirapuera" component={ParqueIbirapuera} />
+        <Stack.Screen name="Aquario" component={Aquario} />
       </Stack.Navigator>
     </NavigationContainer>
   );
