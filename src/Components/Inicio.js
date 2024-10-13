@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   button: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#266951',
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 30,
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     marginTop: 10, // Ajuste este valor conforme necessário
   },
   skipText: {
-    color: '#4CAF50',
+    color: '#266951',
     fontSize: 16,
     fontWeight: '600',
   },

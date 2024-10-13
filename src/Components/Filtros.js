@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     color: '#888',
   },
   applyButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#266951',
     padding: 15,
     borderRadius: 5,
     alignItems: 'center',

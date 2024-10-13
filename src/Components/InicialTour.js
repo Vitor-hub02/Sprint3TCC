@@ -36,7 +36,7 @@ const InicialTour = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient colors={['#4CAF50', '#2E7D32']} style={styles.header}>
+      <LinearGradient colors={['#266951', '#2E7D32']} style={styles.header}>
         <Text style={styles.headerTitle}>TourGuide</Text>
         <View style={styles.headerIcons}>
           <TouchableOpacity onPress={() => navigation.navigate('Filtros')} style={styles.headerIcon}>
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   seeAllText: {
-    color: '#4CAF50',
+    color: '#266951',
     fontSize: 16,
     fontWeight: '600',
   },
@@ -400,7 +400,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   profileButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#266951',
     padding: 15,
     borderRadius: 5,
     alignItems: 'center',
@@ -411,7 +411,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   closeProfileText: {
-    color: '#4CAF50',
+    color: '#266951',
     marginTop: 20,
     textAlign: 'center',
   },
