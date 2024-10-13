@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import auth from '@react-native-firebase/auth';
+
+const { width } = Dimensions.get('window'); // Obtendo a largura da tela
 
 export default function RedefinirSenha({ navigation }) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const validatePassword = (password) => {
     const lengthValid = password.length >= 8 && password.length <= 70;
@@ -28,9 +30,8 @@ export default function RedefinirSenha({ navigation }) {
     }
 
     try {
-
       alert('Senha redefinida com sucesso!');
-      navigation.navigate('Login2'); // Redirecionar para a tela de login
+      navigation.navigate('Login2');
     } catch (error) {
       setError('Erro ao redefinir a senha. Tente novamente.');
     }
@@ -38,15 +39,7 @@ export default function RedefinirSenha({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Icon name="arrow-left" size={30} color="green" />
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.helpButton}>
-        <Icon name="question-circle" size={30} color="green" />
-      </TouchableOpacity>
-
-      <Text style={styles.title}>Redefinição de senha</Text>
+      <Text style={styles.title}>Redefinição de Senha</Text>
 
       <View style={styles.inputContainer}>
         <TextInput
@@ -54,10 +47,10 @@ export default function RedefinirSenha({ navigation }) {
           placeholder="Digite sua nova senha"
           value={password}
           onChangeText={setPassword}
-          secureTextEntry={true}
+          secureTextEntry={!showPassword}
         />
-        <TouchableOpacity style={styles.eyeIcon}>
-          <Icon name="eye" size={20} color="black" />
+        <TouchableOpacity style={styles.eyeIcon} onPress={() => setShowPassword(!showPassword)}>
+          <Icon name={showPassword ? "eye-slash" : "eye"} size={20} color="black" />
         </TouchableOpacity>
       </View>
 
@@ -67,17 +60,17 @@ export default function RedefinirSenha({ navigation }) {
           placeholder="Confirmar nova senha"
           value={confirmPassword}
           onChangeText={setConfirmPassword}
-          secureTextEntry={true}
+          secureTextEntry={!showPassword}
         />
-        <TouchableOpacity style={styles.eyeIcon}>
-          <Icon name="eye" size={20} color="black" />
+        <TouchableOpacity style={styles.eyeIcon} onPress={() => setShowPassword(!showPassword)}>
+          <Icon name={showPassword ? "eye-slash" : "eye"} size={20} color="black" />
         </TouchableOpacity>
       </View>
 
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
       <TouchableOpacity style={styles.button} onPress={handleResetPassword}>
-        <Text style={styles.buttonText}>Redefinir</Text>
+        <Text style={styles.buttonText}>Redefinir Senha</Text>
       </TouchableOpacity>
     </View>
   );
@@ -90,29 +83,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#f7f7f7',
   },
-  backButton: {
-    position: 'absolute',
-    top: 20,
-    left: 20,
-  },
-  helpButton: {
-    position: 'absolute',
-    top: 20,
-    right: 20,
-  },
   title: {
-    fontSize: 24,
+    fontSize: width < 400 ? 24 : 28, // Ajustando o tamanho do texto com base na largura da tela
     fontWeight: 'bold',
     textAlign: 'center',
-    marginVertical: 20,
+    marginBottom: 30,
+    color: '#333',
   },
   inputContainer: {
     flexDirection: 'row',
     backgroundColor: '#fff',
-    borderRadius: 5,
-    paddingHorizontal: 10,
+    borderRadius: 10,
+    paddingHorizontal: 15,
     marginVertical: 10,
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
   input: {
     flex: 1,
@@ -123,15 +112,17 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   button: {
-    backgroundColor: 'green',
+    backgroundColor: '#266951',
     padding: 15,
-    borderRadius: 5,
+    borderRadius: 10,
     marginTop: 20,
     alignItems: 'center',
+    elevation: 3,
   },
   buttonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   errorText: {
     color: 'red',

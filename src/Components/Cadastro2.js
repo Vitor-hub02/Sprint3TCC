@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import auth from '@react-native-firebase/auth';
 
 export default function Cadastro2({ navigation }) {
   const [name, setName] = useState('');
@@ -29,9 +28,16 @@ export default function Cadastro2({ navigation }) {
     };
     setEmptyFields(newEmptyFields);
 
-    if (Object.values(newEmptyFields).some(field => field)) {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos.');
-      return;
+    // Verificando se os campos obrigatórios estão vazios
+    const emptyFieldsMessages = [];
+    if (!name) emptyFieldsMessages.push('Nome completo é obrigatório.');
+    if (!email) emptyFieldsMessages.push('E-mail é obrigatório.');
+    if (!password) emptyFieldsMessages.push('Senha é obrigatória.');
+    if (!confirmPassword) emptyFieldsMessages.push('Confirmação de senha é obrigatória.');
+
+    if (emptyFieldsMessages.length > 0) {
+      Alert.alert('Erro', 'Para continuar, preencha todos os campos obrigatórios:\n' + emptyFieldsMessages.join('\n'));
+      return; // Certifique-se de retornar aqui para evitar continuar a execução
     }
 
     if (password !== confirmPassword) {
@@ -199,7 +205,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   signupButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#266951',
     padding: 15,
     borderRadius: 8,
     alignItems: 'center',
@@ -211,7 +217,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   loginText: {
-    color: '#4CAF50',
+    color: '#266951',
     textAlign: 'center',
     marginTop: 20,
     fontSize: 16,

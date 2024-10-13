@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+const { width } = Dimensions.get('window'); // Obtendo a largura da tela
 
 export default function CodigoVerificacao({ navigation }) {
   const [code, setCode] = useState('');
@@ -12,23 +14,23 @@ export default function CodigoVerificacao({ navigation }) {
       alert('Código inválido. Por favor, insira um código de 6 dígitos.');
     }
   };
-  
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
         <Icon name="arrow-left" size={30} color="green" />
       </TouchableOpacity>
-  
+
       <TouchableOpacity style={styles.helpButton}>
         <Icon name="question-circle" size={30} color="green" />
       </TouchableOpacity>
-  
-      <Text style={styles.title}>Código de verificação</Text>
-  
+
+      <Text style={styles.title}>Código de Verificação</Text>
+
       <Text style={styles.description}>
         Um email foi enviado para seu endereço com um código de verificação. Insira-o abaixo para continuar.
       </Text>
-  
+
       <TextInput
         style={styles.input}
         placeholder="Código de verificação"
@@ -37,7 +39,7 @@ export default function CodigoVerificacao({ navigation }) {
         keyboardType="number-pad"
         maxLength={6}
       />
-  
+
       <TouchableOpacity style={styles.button} onPress={handleCodeVerification}>
         <Text style={styles.buttonText}>Próximo</Text>
       </TouchableOpacity>
@@ -63,33 +65,42 @@ const styles = StyleSheet.create({
     right: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: width < 400 ? 20 : 24, // Ajustando o tamanho do texto com base na largura da tela
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 20,
+    color: '#333',
   },
   description: {
-    fontSize: 16,
+    fontSize: width < 400 ? 14 : 16, // Ajustando o tamanho do texto com base na largura da tela
     textAlign: 'center',
     marginVertical: 10,
+    color: '#666',
   },
   input: {
     backgroundColor: '#fff',
-    padding: 10,
-    borderRadius: 5,
+    padding: 15,
+    borderRadius: 10,
     marginVertical: 10,
     fontSize: 16,
     textAlign: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
   button: {
-    backgroundColor: 'green',
+    backgroundColor: '#266951',
     padding: 15,
-    borderRadius: 5,
+    borderRadius: 10,
     marginTop: 20,
     alignItems: 'center',
+    elevation: 3,
   },
   buttonText: {
     color: '#fff',
     fontSize: 16,
+    fontWeight: 'bold',
   },
 });
