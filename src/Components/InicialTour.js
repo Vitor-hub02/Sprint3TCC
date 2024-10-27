@@ -4,9 +4,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const categoryImages = {
-  'Ecoturismo': require('../assets/ecoturismo.jpeg'),
-  'Transporte sustentável': require('../assets/transporte.jpg'),
-  'Acomodações sustentáveis': require('../assets/acomodacoes.jpg')
+  'Parques': require('../assets/Parques.jpg'),
+  'Praças e áreas verdes': require('../assets/pracas.jpg'),
+  'Ciclovias e trilhas': require('../assets/ciclovias.jpeg'),
+  'Centros culturais ao ar livre': require('../assets/centrocultural.jpg'),
+  'Mercados e feiras locais': require('../assets/mercadolocal.jpeg'),
 };
 
 /*Essas imagens precisam ser trocadas SP */
@@ -59,7 +61,7 @@ const InicialTour = ({ navigation }) => {
         </View>
 
         <View style={styles.categoriesHeader}>
-          <Text style={styles.sectionTitle}>Destinos</Text>
+          <Text style={styles.sectionTitle}>Suas preferências de destinos</Text>
           <TouchableOpacity onPress={() => navigation.navigate('Categorias')}>
           <Text style={styles.seeAllText}>Ver todas</Text>
         </TouchableOpacity>
@@ -67,7 +69,23 @@ const InicialTour = ({ navigation }) => {
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoriesContainer}>
           {Object.keys(categoryImages).map((category, index) => (
-            <TouchableOpacity key={index} style={styles.categoryItem}>
+            <TouchableOpacity 
+              key={index} 
+              style={styles.categoryItem}
+              onPress={() => {
+                if (category === 'Parques') {
+                  navigation.navigate('Parques'); 
+                } else if (category === 'Praças e áreas verdes') {
+                  navigation.navigate('Praca'); 
+                } else if (category === 'Ciclovias e trilhas') {
+                  navigation.navigate('Ciclovias'); // Navega para a tela Ciclovias
+                } else if (category === 'Centros culturais ao ar livre') {
+                  navigation.navigate('CentrosCulturais'); // Navega para a tela CentrosCulturais
+                }else if (category === 'Mercados e feiras locais') {
+                  navigation.navigate('Mercados'); // Navega para a tela CentrosCulturais
+                }
+              }}
+            >
               <LinearGradient colors={['rgba(0,0,0,0.3)', 'rgba(0,0,0,0.7)']} style={styles.categoryGradient}>
                 <Image source={categoryImages[category]} style={styles.categoryImage} />
                 <Text style={styles.categoryText}>{category}</Text>

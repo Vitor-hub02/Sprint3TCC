@@ -27,6 +27,11 @@ import EscolherPreferencias2 from './src/Components/EscolherPreferencias2';
 import EscolherPreferencias3 from './src/Components/EscolherPreferencias3';
 import ParqueIbirapuera from './src/Components/ParqueIbirapuera';
 import Aquario from './src/Components/Aquario';
+import Parques from './src/Components/Parques';
+import Praca from './src/Components/Praca';
+import Ciclovias from './src/Components/Ciclovias';
+import CentrosCulturais from './src/Components/CentrosCulturais';
+import Mercados from './src/Components/Mercados';
 // Importando as novas telas
 
 
@@ -70,6 +75,11 @@ function App() {
         <Stack.Screen name="EscolherPreferencias3" component={EscolherPreferencias3} />
         <Stack.Screen name="ParqueIbirapuera" component={ParqueIbirapuera} />
         <Stack.Screen name="Aquario" component={Aquario} />
+        <Stack.Screen name="Parques" component={Parques} />
+        <Stack.Screen name="Praca" component={Praca} />
+        <Stack.Screen name="Ciclovias" component={Ciclovias} />
+        <Stack.Screen name="CentrosCulturais" component={CentrosCulturais} />
+        <Stack.Screen name="Mercados" component={Mercados} />
       </Stack.Navigator>
     </NavigationContainer>
   );
