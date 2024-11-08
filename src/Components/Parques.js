@@ -1,7 +1,8 @@
-// meu-tour-atualizado-expo/src/Components/DetalhesParque.js
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native'; // Importar useNavigation
+import { Ionicons } from '@expo/vector-icons'; // Importar Ionicons
 
 const parkDetails = [
   {
@@ -103,8 +104,16 @@ const parkDetails = [
 ];
 
 const Parques = () => {
+  const navigation = useNavigation(); // Usar o hook useNavigation
+
   return (
     <View style={styles.container}>
+      <TouchableOpacity 
+        style={styles.botaoVoltar} 
+        onPress={() => navigation.navigate('InicialTour')} // Navegar para InicialTour
+      >
+        <Ionicons name="arrow-back" size={24} color="#FFFFFF" /> {/* Ícone de voltar */}
+      </TouchableOpacity>
       <ScrollView>
         {parkDetails.map((park, index) => (
           <View key={index} style={styles.card}>
@@ -188,6 +197,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#666',
     marginLeft: 20,
+  },
+  botaoVoltar: {
+    backgroundColor: '#266951',
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginBottom: 10,
+    flexDirection: 'row', // Para alinhar o ícone
+    justifyContent: 'flex-start', // Alinhar à esquerda
   },
 });
 

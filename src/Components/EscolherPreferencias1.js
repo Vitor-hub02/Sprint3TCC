@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-const opcoes = [
-  { id: 1, texto: 'Parques', icone: 'flower' },
-  { id: 2, texto: 'Praças e áreas verdes urbanas', icone: 'leaf' },
-  { id: 3, texto: 'Ciclovias e trilhas para caminhadas', icone: 'bicycle' },
-  { id: 4, texto: 'Centros culturais ao ar livre', icone: 'business' },
-  { id: 5, texto: 'Mercados e feiras locais', icone: 'cart' },
+const tempoLivre = [
+  { id: 1, texto: 'Parques', icone: 'leaf' },
+  { id: 2, texto: 'Museus', icone: 'diamond-outline' },
+  { id: 3, texto: 'Shopping', icone: 'fast-food-outline' },
+  { id: 4, texto: 'Teatro', icone: 'easel-outline' },
+  { id: 5, texto: 'Mercados', icone: 'nutrition' },
+  { id: 6, texto: 'Cinemas', icone: 'videocam-outline' },
 ];
 
 const EscolherPreferencias1 = ({ navigation }) => {
@@ -21,31 +22,41 @@ const EscolherPreferencias1 = ({ navigation }) => {
     );
   };
 
+  const handleContinuar = () => {
+    if (selecoes.length === 0) {
+      alert('Por favor, selecione pelo menos uma preferência para continuar.');
+    } else {
+      navigation.navigate('EscolherPreferencias2');
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.titulo}>Onde você costuma passar seu tempo livre?</Text>
+        <Text style={styles.titulo}>
+          Onde você costuma passar seu tempo livre?
+        </Text>
       </View>
       <ScrollView contentContainerStyle={styles.scrollView}>
-        {opcoes.map((opcao) => (
+        {tempoLivre.map((tempo) => (
           <TouchableOpacity
-            key={opcao.id}
+            key={tempo.id}
             style={[
-              styles.opcao,
-              selecoes.includes(opcao.id) && styles.opcaoSelecionada
+              styles.tempo,
+              selecoes.includes(tempo.id) && styles.tempoSelecionada
             ]}
-            onPress={() => toggleSelecao(opcao.id)}
+            onPress={() => toggleSelecao(tempo.id)}
           >
-            <Ionicons
-                name={opcao.icone} 
-                size={24} 
-                color={selecoes.includes(opcao.id) ? '#FFFFFF' : '#4A4A4A'} 
+            <Ionicons 
+              name={tempo.icone} 
+              size={24} 
+              color={selecoes.includes(tempo.id) ? '#FFFFFF' : '#4A4A4A'} 
             />
             <Text style={[
-              styles.opcaoTexto,
-              selecoes.includes(opcao.id) && styles.opcaoTextoSelecionado
+              styles.tempoTexto,
+              selecoes.includes(tempo.id) && styles.tempoTextoSelecionado
             ]}>
-            {opcao.texto}
+              {tempo.texto}
             </Text>
           </TouchableOpacity>
         ))}
@@ -53,7 +64,7 @@ const EscolherPreferencias1 = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.botaoContinuar}
-        onPress={() => navigation.navigate('EscolherPreferencias2')}
+        onPress={handleContinuar} // Alterado para usar a nova função
       >
         <Text style={styles.botaoContinuarTexto}>Continuar</Text>
       </TouchableOpacity>
@@ -80,7 +91,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 20,
   },
-  opcao: {
+  tempo: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 15,
@@ -88,15 +99,15 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: '#F0F0F0',
   },
-  opcaoSelecionada: {
+  tempoSelecionada: {
     backgroundColor: '#266951',
   },
-  opcaoTexto: {
+  tempoTexto: {
     marginLeft: 10,
     fontSize: 16,
     color: '#4A4A4A',
   },
-  opcaoTextoSelecionado: {
+  tempoTextoSelecionado: {
     color: '#FFFFFF',
   },
   botaoContinuar: {

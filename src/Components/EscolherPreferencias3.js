@@ -3,12 +3,12 @@ import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } fr
 import { Ionicons } from '@expo/vector-icons';
 
 const opcoesLugares = [
-    { id: 1, texto: 'Construção verde', icone: 'home-outline' },
+    { id: 1, texto: 'Hortas comunitárias', icone: 'leaf-outline' },
     { id: 2, texto: 'Bem-estar animal', icone: 'paw-outline' },
     { id: 3, texto: 'Consciência cultural', icone: 'people-outline' },
-    { id: 4, texto: 'Agricultura sustentável', icone: 'leaf-outline' },
+    { id: 4, texto: 'Eventos de sustentabilidade', icone: 'rose-outline' },
     { id: 5, texto: 'Unidades de conservação ambiental', icone: 'earth-outline' },
-  ];
+];
 
 const EscolherPreferencias3 = ({ navigation }) => {
   const [selecoes, setSelecoes] = useState([]);
@@ -19,6 +19,14 @@ const EscolherPreferencias3 = ({ navigation }) => {
         ? prevSelecoes.filter(item => item !== id)
         : [...prevSelecoes, id]
     );
+  };
+
+  const handleFinalizar = () => {
+    if (selecoes.length === 0) {
+      alert('Por favor, selecione pelo menos uma preferência para continuar.');
+    } else {
+      navigation.navigate('Login');
+    }
   };
 
   return (
@@ -55,7 +63,7 @@ const EscolherPreferencias3 = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.botaoContinuar}
-        onPress={() => navigation.navigate('Login')}
+        onPress={handleFinalizar} // Alterado para usar a nova função
       >
         <Text style={styles.botaoContinuarTexto}>Finalizar</Text>
       </TouchableOpacity>
@@ -98,7 +106,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#4A4A4A',
   },
-  opcaoTextoSelecionado: {
+  opcaoTextoSelecionada: {
     color: '#FFFFFF',
   },
   botaoContinuar: {

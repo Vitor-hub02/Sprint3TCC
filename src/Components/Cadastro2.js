@@ -37,7 +37,7 @@ export default function Cadastro2({ navigation }) {
 
     if (emptyFieldsMessages.length > 0) {
       Alert.alert('Erro', 'Para continuar, preencha todos os campos obrigatórios:\n' + emptyFieldsMessages.join('\n'));
-      return; // Certifique-se de retornar aqui para evitar continuar a execução
+      return;
     }
 
     if (password !== confirmPassword) {
@@ -155,7 +155,7 @@ export default function Cadastro2({ navigation }) {
           <Text style={styles.buttonText}>Criar Conta</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Login2')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text style={styles.loginText}>Já tem uma conta? Faça login</Text>
         </TouchableOpacity>
       </ScrollView>

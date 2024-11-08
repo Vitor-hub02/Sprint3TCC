@@ -71,8 +71,8 @@ export default function Login({ navigation }) {
           <Icon name="arrow-left" size={24} color="#333" />
         </TouchableOpacity>
 
-        <Text style={styles.title}>Bem-vindo!</Text>
-        <Text style={styles.subtitle}>Acesse sua conta para desfrutar de todos os nossos benefícios</Text>
+        <Text style={styles.title}>Bem-vindo</Text>
+        <Text style={styles.subtitle}>Acesse sua conta para navegar no TourGuide!</Text>
 
         <View style={styles.inputContainer}>
           <Icon name="envelope" size={20} color="#666" style={styles.inputIcon} />
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
-    marginBottom: 20,
+    marginTop: 30,
   },
   inputIcon: {
     marginRight: 10,

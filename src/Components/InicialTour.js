@@ -5,10 +5,11 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 const categoryImages = {
   'Parques': require('../assets/Parques.jpg'),
-  'Praças e áreas verdes': require('../assets/pracas.jpg'),
-  'Ciclovias e trilhas': require('../assets/ciclovias.jpeg'),
-  'Centros culturais ao ar livre': require('../assets/centrocultural.jpg'),
+  'Museus': require('../assets/exemploMuseu.jpg'),
+  'Shopping': require('../assets/exemploShopping.jpeg'),
+  'Teatro': require('../assets/exemploTeatro.jpg'),
   'Mercados e feiras locais': require('../assets/mercadolocal.jpeg'),
+  'Cinemas': require('../assets/exemploCinema.jpg'),
 };
 
 /*Essas imagens precisam ser trocadas SP */
@@ -75,14 +76,19 @@ const InicialTour = ({ navigation }) => {
               onPress={() => {
                 if (category === 'Parques') {
                   navigation.navigate('Parques'); 
-                } else if (category === 'Praças e áreas verdes') {
-                  navigation.navigate('Praca'); 
-                } else if (category === 'Ciclovias e trilhas') {
-                  navigation.navigate('Ciclovias'); // Navega para a tela Ciclovias
-                } else if (category === 'Centros culturais ao ar livre') {
-                  navigation.navigate('CentrosCulturais'); // Navega para a tela CentrosCulturais
+                } else if (category === 'Museus') {
+                  navigation.navigate('Museus'); 
+                } else if (category === 'Shopping') {
+                  navigation.navigate('Shopping'); // Navega para a tela Shopping
+                } else if (category === 'Teatro') {
+                  navigation.navigate('Teatro'); // Navega para a tela Teatro
                 }else if (category === 'Mercados e feiras locais') {
-                  navigation.navigate('Mercados'); // Navega para a tela CentrosCulturais
+                  navigation.navigate('Mercados'); // Navega para a tela Mercados
+                }else if (category === 'Teatros') {
+                  navigation.navigate('Teatros'); // Navega para a tela Teatros
+                }
+                else if (category === 'Pet Friendly') {
+                  navigation.navigate('Pet'); // Navega para a tela pet
                 }
               }}
             >

@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import './index.css';
@@ -13,7 +13,6 @@ import Integracao1 from './src/Components/Integracao1';
 import Integracao2 from './src/Components/Integracao2';
 import Integracao3 from './src/Components/Integracao3';
 import Login from './src/Components/Login';
-import Login2 from './src/Components/Login2';
 import RedefinirSenha from './src/Components/RedefinirSenha';
 import InicialTour from './src/Components/InicialTour';
 import Categorias from './src/Components/Categorias';
@@ -28,12 +27,12 @@ import EscolherPreferencias3 from './src/Components/EscolherPreferencias3';
 import ParqueIbirapuera from './src/Components/ParqueIbirapuera';
 import Aquario from './src/Components/Aquario';
 import Parques from './src/Components/Parques';
-import Praca from './src/Components/Praca';
-import Ciclovias from './src/Components/Ciclovias';
-import CentrosCulturais from './src/Components/CentrosCulturais';
 import Mercados from './src/Components/Mercados';
+import Museu from './src/Components/Museu';
+import Shopping from './src/Components/Shopping';
+import Teatro from './src/Components/Teatro';
+import Cinemas from './src/Components/Cinemas';
 // Importando as novas telas
-
 
 const Stack = createNativeStackNavigator();
 
@@ -52,34 +51,146 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Inicio">
-        <Stack.Screen name="Inicio" component={Inicio} />
-        <Stack.Screen name="Cadastro" component={Cadastro1} />
-        <Stack.Screen name="Cadastro2" component={Cadastro2} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Login2" component={Login2} />
-        <Stack.Screen name="CodigoVerificacao" component={CodigoVerificacao} />
-        <Stack.Screen name="EsqueciSenha" component={EsqueciSenha} />
-        <Stack.Screen name="Integracao1" component={Integracao1} />
-        <Stack.Screen name="Integracao2" component={Integracao2} />
-        <Stack.Screen name="Integracao3" component={Integracao3} />
-        <Stack.Screen name="RedefinirSenha" component={RedefinirSenha} />
-        <Stack.Screen name="InicialTour" component={InicialTour} />
-        <Stack.Screen name="Categorias" component={Categorias} />
-        <Stack.Screen name="BuscaLocais" component={BuscaLocais} />
-        <Stack.Screen name="Filtros" component={Filtros} />
-        <Stack.Screen name="FiltroMeioTransporte" component={FiltroMeioTransporte} />
-        <Stack.Screen name="EscolherRota" component={EscolherRota} />
-        <Stack.Screen name="TipoTurismo" component={TipoTurismo} />
-        <Stack.Screen name="EscolherPreferencias1" component={EscolherPreferencias1} />
-        <Stack.Screen name="EscolherPreferencias2" component={EscolherPreferencias2} />
-        <Stack.Screen name="EscolherPreferencias3" component={EscolherPreferencias3} />
-        <Stack.Screen name="ParqueIbirapuera" component={ParqueIbirapuera} />
-        <Stack.Screen name="Aquario" component={Aquario} />
-        <Stack.Screen name="Parques" component={Parques} />
-        <Stack.Screen name="Praca" component={Praca} />
-        <Stack.Screen name="Ciclovias" component={Ciclovias} />
-        <Stack.Screen name="CentrosCulturais" component={CentrosCulturais} />
-        <Stack.Screen name="Mercados" component={Mercados} />
+        <Stack.Screen 
+          name="Inicio" 
+          component={Inicio} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Cadastro" 
+          component={Cadastro1} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Cadastro2" 
+          component={Cadastro2} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Login" 
+          component={Login} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="CodigoVerificacao" 
+          component={CodigoVerificacao} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="EsqueciSenha" 
+          component={EsqueciSenha} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Integracao1" 
+          component={Integracao1} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Integracao2" 
+          component={Integracao2} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Integracao3" 
+          component={Integracao3} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="RedefinirSenha" 
+          component={RedefinirSenha} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="InicialTour" 
+          component={InicialTour} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Categorias" 
+          component={Categorias} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="BuscaLocais" 
+          component={BuscaLocais} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Filtros" 
+          component={Filtros} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="FiltroMeioTransporte" 
+          component={FiltroMeioTransporte} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="EscolherRota" 
+          component={EscolherRota} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="TipoTurismo" 
+          component={TipoTurismo} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="EscolherPreferencias1" 
+          component={EscolherPreferencias1} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="EscolherPreferencias2" 
+          component={EscolherPreferencias2} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="EscolherPreferencias3" 
+          component={EscolherPreferencias3} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="ParqueIbirapuera" 
+          component={ParqueIbirapuera} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Aquario" 
+          component={Aquario} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Parques" 
+          component={Parques} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Mercados" 
+          component={Mercados} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Museu" 
+          component={Museu} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Shopping" 
+          component={Shopping} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Teatro" 
+          component={Teatro} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Cinemas" 
+          component={Cinemas} 
+          options={{ headerShown: false }} 
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

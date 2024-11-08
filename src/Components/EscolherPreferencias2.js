@@ -21,6 +21,14 @@ const EscolherPreferencias2 = ({ navigation }) => {
     );
   };
 
+  const handleContinuar = () => {
+    if (selecoes.length === 0) {
+      alert('Por favor, selecione pelo menos uma preferência para continuar.');
+    } else {
+      navigation.navigate('EscolherPreferencias3');
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -55,7 +63,7 @@ const EscolherPreferencias2 = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.botaoContinuar}
-        onPress={() => navigation.navigate('EscolherPreferencias3')}
+        onPress={handleContinuar} // Alterado para usar a nova função
       >
         <Text style={styles.botaoContinuarTexto}>Continuar</Text>
       </TouchableOpacity>
@@ -98,7 +106,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#4A4A4A',
   },
-  opcaoTextoSelecionado: {
+  opcaoTextoSelecionada: {
     color: '#FFFFFF',
   },
   botaoContinuar: {
