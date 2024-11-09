@@ -33,18 +33,17 @@ const EscolherPreferencias1 = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.titulo}>
-          Onde você costuma passar seu tempo livre?
-        </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Inicio')}>
+          <Ionicons name="arrow-back" size={24} color="#4A4A4A" />
+        </TouchableOpacity>
+        <Text style={styles.titulo}>Onde você costuma passar seu tempo livre?</Text>
+        <View style={{ width: 24 }} />
       </View>
       <ScrollView contentContainerStyle={styles.scrollView}>
         {tempoLivre.map((tempo) => (
           <TouchableOpacity
             key={tempo.id}
-            style={[
-              styles.tempo,
-              selecoes.includes(tempo.id) && styles.tempoSelecionada
-            ]}
+            style={[styles.tempo, selecoes.includes(tempo.id) && styles.tempoSelecionada]}
             onPress={() => toggleSelecao(tempo.id)}
           >
             <Ionicons 
@@ -52,10 +51,7 @@ const EscolherPreferencias1 = ({ navigation }) => {
               size={24} 
               color={selecoes.includes(tempo.id) ? '#FFFFFF' : '#4A4A4A'} 
             />
-            <Text style={[
-              styles.tempoTexto,
-              selecoes.includes(tempo.id) && styles.tempoTextoSelecionado
-            ]}>
+            <Text style={[styles.tempoTexto, selecoes.includes(tempo.id) && styles.tempoTextoSelecionado]}>
               {tempo.texto}
             </Text>
           </TouchableOpacity>
@@ -64,7 +60,7 @@ const EscolherPreferencias1 = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.botaoContinuar}
-        onPress={handleContinuar} // Alterado para usar a nova função
+        onPress={handleContinuar}
       >
         <Text style={styles.botaoContinuarTexto}>Continuar</Text>
       </TouchableOpacity>
@@ -78,14 +74,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingTop: 60,
     paddingHorizontal: 20,
-    paddingBottom: 40,
+    paddingBottom: 20,
   },
   titulo: {
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
+    flex: 1, // Permite que o título ocupe o espaço disponível
   },
   scrollView: {
     paddingTop: 20,
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0F0F0',
   },
   tempoSelecionada: {
-    backgroundColor: '#266951',
+    backgroundColor: '#53a65b',
   },
   tempoTexto: {
     marginLeft: 10,
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   botaoContinuar: {
-    backgroundColor: '#266951',
+    backgroundColor: '#53a65b',
     padding: 15,
     borderRadius: 10,
     margin: 20,

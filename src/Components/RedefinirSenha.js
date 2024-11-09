@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const { width } = Dimensions.get('window'); // Obtendo a largura da tela
@@ -30,8 +30,9 @@ export default function RedefinirSenha({ navigation }) {
     }
 
     try {
+      // Aqui você deve adicionar a lógica para redefinir a senha no Firebase
       alert('Senha redefinida com sucesso!');
-      navigation.navigate('Login2');
+      navigation.navigate('Login'); // Navega para a tela de Login
     } catch (error) {
       setError('Erro ao redefinir a senha. Tente novamente.');
     }
@@ -39,6 +40,11 @@ export default function RedefinirSenha({ navigation }) {
 
   return (
     <View style={styles.container}>
+
+      <Image
+        source={require('../assets/recuperar.png')} // Verifique se o caminho está correto
+        style={styles.headerImage}
+      />
       <Text style={styles.title}>Redefinição de Senha</Text>
 
       <View style={styles.inputContainer}>
@@ -112,7 +118,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   button: {
-    backgroundColor: '#266951',
+    backgroundColor: '#53a65b',
     padding: 15,
     borderRadius: 10,
     marginTop: 20,
@@ -128,5 +134,11 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'center',
     marginVertical: 10,
+  },
+  headerImage: {
+    width: '100%',
+    height: 200,
+    resizeMode: 'contain',
+    marginBottom: 20,
   },
 });

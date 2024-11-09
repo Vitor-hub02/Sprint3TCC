@@ -1,7 +1,14 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons'; // Para ícones
 
-const opcoesMeioTransporte = ['Avião', 'Bicicleta', 'Trens', 'Carro', 'Ônibus', 'A pé'];
+const opcoesMeioTransporte = [
+  { id: 'bicicleta', label: 'Bicicleta', icon: 'directions-bike' },
+  { id: 'trens', label: 'Trens', icon: 'train' },
+  { id: 'carro', label: 'Carro', icon: 'directions-car' },
+  { id: 'onibus', label: 'Ônibus', icon: 'directions-bus' },
+  { id: 'ape', label: 'A pé', icon: 'directions-walk' },
+];
 
 const FiltroMeioTransporte = ({ navigation }) => {
   const selecionarMeio = (meio) => {
@@ -14,7 +21,7 @@ const FiltroMeioTransporte = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.backButton}>{'<'}</Text>
         </TouchableOpacity>
-        <Text style={styles.title}>Meio de transporte</Text>
+        <Text style={styles.title}>Meio de Transporte</Text>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.closeButton}>X</Text>
         </TouchableOpacity>
@@ -22,19 +29,22 @@ const FiltroMeioTransporte = ({ navigation }) => {
 
       <Text style={styles.subtitle}>Qual meio de transporte você deseja utilizar?</Text>
 
-      {opcoesMeioTransporte.map((meio) => (
-        <TouchableOpacity
-          key={meio}
-          style={styles.opcao}
-          onPress={() => selecionarMeio(meio)}
-        >
-          <Text style={styles.opcaoTexto}>{meio}</Text>
+      <FlatList
+        data={opcoesMeioTransporte}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
           <TouchableOpacity
-            style={styles.radio}
-            onPress={() => selecionarMeio(meio)}
-          />
-        </TouchableOpacity>
-      ))}
+            style={styles.opcao}
+            onPress={() => selecionarMeio(item.label)}
+          >
+            <View style={styles.optionContent}>
+              <MaterialIcons name={item.icon} size={24} color="#53a65b" style={styles.icon} />
+              <Text style={styles.opcaoTexto}>{item.label}</Text>
+            </View>
+            <View style={styles.radio} />
+          </TouchableOpacity>
+        )}
+      />
     </View>
   );
 };
@@ -42,7 +52,7 @@ const FiltroMeioTransporte = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#e9f5e9', // Cor de fundo suave
     padding: 20,
   },
   header: {
@@ -54,18 +64,23 @@ const styles = StyleSheet.create({
   backButton: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: '#53a65b',
   },
   closeButton: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: '#53a65b',
   },
   title: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'bold',
+    color: '#555',
   },
   subtitle: {
     fontSize: 16,
     marginBottom: 20,
+    color: '#555',
+    marginTop: 30, // Aumenta a margem superior
   },
   opcao: {
     flexDirection: 'row',
@@ -73,17 +88,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
+    borderBottomColor: '#c8e6c9', // Verde claro
+    backgroundColor: '#fff', // Fundo branco para as opções
+    borderRadius: 8,
+    marginVertical: 5,
+  },
+  optionContent: {
+    flexDirection: 'row',
+    paddingLeft: 10, // Adiciona espaço à esquerda do conteúdo da opção
+  },
+  icon: {
+    marginRight: 30, // Adiciona espaço à direita do ícone
   },
   opcaoTexto: {
     fontSize: 16,
+    marginLeft: 10,
+    color: '#555',
   },
   radio: {
     width: 24,
     height: 24,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: '#4CAF50',
+    borderColor: '#53a65b',
+    backgroundColor: 'transparent', // Fundo transparente
+    marginLeft: 40,
+    marginRight: 30, 
   },
 });
 

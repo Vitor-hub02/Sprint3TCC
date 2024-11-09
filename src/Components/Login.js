@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   loginButton: {
-    backgroundColor: '#266951',
+    backgroundColor: '#53a65b',
     padding: 15,
     borderRadius: 8,
     alignItems: 'center',
@@ -211,10 +211,10 @@ const styles = StyleSheet.create({
   },
   registerTextBold: {
     fontWeight: 'bold',
-    color: '#266951',
+    color: '#53a65b',
   },
   forgotPasswordText: {
-    color: '#266951',
+    color: '#53a65b',
     textAlign: 'right',
     marginTop: 10,
     marginBottom: 20,

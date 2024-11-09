@@ -32,18 +32,19 @@ const EscolherPreferencias3 = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Ionicons name="arrow-back" size={24} color="#4A4A4A" />
+        </TouchableOpacity>
         <Text style={styles.titulo}>
             Você estaria interessado em frequentar lugares que promovam ações voltadas para:
         </Text>
+        <View style={{ width: 24 }} />
       </View>
       <ScrollView contentContainerStyle={styles.scrollView}>
         {opcoesLugares.map((opcao) => (
           <TouchableOpacity
             key={opcao.id}
-            style={[
-              styles.opcao,
-              selecoes.includes(opcao.id) && styles.opcaoSelecionada
-            ]}
+            style={[styles.opcao, selecoes.includes(opcao.id) && styles.opcaoSelecionada]}
             onPress={() => toggleSelecao(opcao.id)}
           >
             <Ionicons 
@@ -51,10 +52,7 @@ const EscolherPreferencias3 = ({ navigation }) => {
               size={24} 
               color={selecoes.includes(opcao.id) ? '#FFFFFF' : '#4A4A4A'} 
             />
-            <Text style={[
-              styles.opcaoTexto,
-              selecoes.includes(opcao.id) && styles.opcaoTextoSelecionado
-            ]}>
+            <Text style={[styles.opcaoTexto, selecoes.includes(opcao.id) && styles.opcaoTextoSelecionada]}>
               {opcao.texto}
             </Text>
           </TouchableOpacity>
@@ -63,7 +61,7 @@ const EscolherPreferencias3 = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.botaoContinuar}
-        onPress={handleFinalizar} // Alterado para usar a nova função
+        onPress={handleFinalizar}
       >
         <Text style={styles.botaoContinuarTexto}>Finalizar</Text>
       </TouchableOpacity>
@@ -77,14 +75,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingTop: 60,
     paddingHorizontal: 20,
-    paddingBottom: 40,
+    paddingBottom: 20,
   },
   titulo: {
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
+    flex: 1, // Permite que o título ocupe o espaço disponível
   },
   scrollView: {
     paddingTop: 20,
@@ -99,7 +101,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0F0F0',
   },
   opcaoSelecionada: {
-    backgroundColor: '#266951',
+    backgroundColor: '#53a65b',
   },
   opcaoTexto: {
     marginLeft: 10,
@@ -110,7 +112,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   botaoContinuar: {
-    backgroundColor: '#266951',
+    backgroundColor: '#53a65b',
     padding: 15,
     borderRadius: 10,
     margin: 20,

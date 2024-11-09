@@ -1,185 +1,148 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+const { width } = Dimensions.get('window'); // Obtendo a largura da tela
 
 export default function Cadastro2({ navigation }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [emptyFields, setEmptyFields] = useState({});
 
   const validatePassword = (password) => {
+    const lengthValid = password.length >= 8 && password.length <= 70;
     const hasUppercase = /[A-Z]/.test(password);
     const hasLowercase = /[a-z]/.test(password);
     const hasNumber = /[0-9]/.test(password);
     const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-    return password.length >= 6 && hasUppercase && hasLowercase && hasNumber && hasSpecialChar;
+    return lengthValid && hasUppercase && hasLowercase && hasNumber && hasSpecialChar;
   };
 
-  const handleSignUp = () => {
-    const newEmptyFields = {
-      name: !name,
-      email: !email,
-      password: !password,
-      confirmPassword: !confirmPassword
-    };
-    setEmptyFields(newEmptyFields);
-
-    // Verificando se os campos obrigatórios estão vazios
-    const emptyFieldsMessages = [];
-    if (!name) emptyFieldsMessages.push('Nome completo é obrigatório.');
-    if (!email) emptyFieldsMessages.push('E-mail é obrigatório.');
-    if (!password) emptyFieldsMessages.push('Senha é obrigatória.');
-    if (!confirmPassword) emptyFieldsMessages.push('Confirmação de senha é obrigatória.');
-
-    if (emptyFieldsMessages.length > 0) {
-      Alert.alert('Erro', 'Para continuar, preencha todos os campos obrigatórios:\n' + emptyFieldsMessages.join('\n'));
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      Alert.alert('Erro', 'As senhas não coincidem.');
-      return;
-    }
-
-    if (!validatePassword(password)) {
-      Alert.alert('Senha Inválida', 
-        'A senha deve conter:\n' +
-        '- No mínimo 6 caracteres\n' +
-        '- Pelo menos uma letra maiúscula\n' +
-        '- Pelo menos uma letra minúscula\n' +
-        '- Pelo menos um número\n' +
-        '- Pelo menos um caractere especial (!@#$% etc.)'
-      );
-      return;
-    }
-
-    createUser();
-  };
-
-  const createUser = async () => {
-    try {
-      await auth().createUserWithEmailAndPassword(email, password);
-      await auth().currentUser.updateProfile({ displayName: name });
-      Alert.alert('Sucesso', 'Usuário cadastrado com sucesso!', [
-        { text: 'OK', onPress: () => navigation.navigate('Login2') }
-      ]);
-    } catch (error) {
-      Alert.alert('Erro', error.message);
-    }
-  };
-
-  const getInputStyle = (field) => {
-    return [
-      styles.input,
-      emptyFields[field] ? styles.inputError : {}
+  const validateEmailProvider = (email) => {
+    const allowedProviders = [
+      '@gmail.com',
+      '@outlook.com',
+      '@hotmail.com',
+      '@live.com',
+      '@yahoo.com',
+      '@icloud.com',
+      '@protonmail.com',
+      '@aol.com',
+      '@terra.com.br',
+      '@uol.com.br',
+      '@bol.com.br',
     ];
+    return allowedProviders.some(provider => email.endsWith(provider));
+  };
+
+  const handleSignUp = async () => {
+    setError(''); // Limpa mensagens de erro anteriores
+
+    if (!name) {
+      setError('Nome completo é obrigatório.');
+      return;
+    }
+    if (!email) {
+      setError('E-mail é obrigatório.');
+      return;
+    }
+    if (!validateEmailProvider(email)) {
+      setError('O endereço de e-mail informado parece estar incorreto. Por favor, verifique se ele está completo, incluindo o @ e o nome do provedor (exemplo: @gmail.com) ');
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError('As senhas não coincidem.');
+      return;
+    }
+    if (!validatePassword(password)) {
+      setError('A senha deve conter:\n- De 8 a 70 caracteres\n- Letra maiúscula\n- Letra minúscula\n- Número\n- Símbolo (!@#$% etc.)');
+      return;
+    }
+
+    try {
+      alert('Usuário cadastrado com sucesso!');
+      navigation.navigate('Login'); // Navega para a tela de Login
+    } catch (error) {
+      setError('Erro ao cadastrar o usuário. Tente novamente.');
+    }
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Icon name="arrow-left" size={24} color="#333" />
+    <View style={styles.container}>
+      <Image
+        source={require('../assets/cadastro.png')} // Substitua pelo caminho da sua imagem
+        style={styles.headerImage}
+      />
+      <Text style={styles.title}>Cadastro</Text>
+
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Nome Completo"
+          value={name}
+          onChangeText={setName}
+        />
+      </View>
+
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="E-mail"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+      </View>
+
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Digite sua nova senha"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={!showPassword}
+        />
+        <TouchableOpacity style={styles.eyeIcon} onPress={() => setShowPassword(!showPassword)}>
+          <Icon name={showPassword ? "eye-slash" : "eye"} size={20} color="black" />
         </TouchableOpacity>
+      </View>
 
-        <Text style={styles.title}>Crie sua conta</Text>
-
-        <View style={styles.inputContainer}>
-          <Icon name="user" size={20} color="#666" style={styles.inputIcon} />
-          <TextInput
-            style={getInputStyle('name')}
-            placeholder="Nome Completo"
-            value={name}
-            onChangeText={(text) => {
-              setName(text);
-              setEmptyFields(prev => ({...prev, name: false}));
-            }}
-            autoCapitalize="words"
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
-          <Icon name="envelope" size={20} color="#666" style={styles.inputIcon} />
-          <TextInput
-            style={getInputStyle('email')}
-            placeholder="Seu e-mail"
-            value={email}
-            onChangeText={(text) => {
-              setEmail(text);
-              setEmptyFields(prev => ({...prev, email: false}));
-            }}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
-          <Icon name="lock" size={20} color="#666" style={styles.inputIcon} />
-          <TextInput
-            style={getInputStyle('password')}
-            placeholder="Sua senha"
-            value={password}
-            onChangeText={(text) => {
-              setPassword(text);
-              setEmptyFields(prev => ({...prev, password: false}));
-            }}
-            secureTextEntry={!showPassword}
-          />
-          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-            <Icon name={showPassword ? "eye-slash" : "eye"} size={20} color="#666" />
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.inputContainer}>
-          <Icon name="lock" size={20} color="#666" style={styles.inputIcon} />
-          <TextInput
-            style={getInputStyle('confirmPassword')}
-            placeholder="Confirmar senha"
-            value={confirmPassword}
-            onChangeText={(text) => {
-              setConfirmPassword(text);
-              setEmptyFields(prev => ({...prev, confirmPassword: false}));
-            }}
-            secureTextEntry={!showConfirmPassword}
-          />
-          <TouchableOpacity onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
-            <Icon name={showConfirmPassword ? "eye-slash" : "eye"} size={20} color="#666" />
-          </TouchableOpacity>
-        </View>
-
-        <TouchableOpacity style={styles.signupButton} onPress={handleSignUp}>
-          <Text style={styles.buttonText}>Criar Conta</Text>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Confirmar nova senha"
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+          secureTextEntry={!showConfirmPassword}
+        />
+        <TouchableOpacity style={styles.eyeIcon} onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
+          <Icon name={showConfirmPassword ? "eye-slash" : "eye"} size={20} color="black" />
         </TouchableOpacity>
+      </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.loginText}>Já tem uma conta? Faça login</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </SafeAreaView>
+      {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
+      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+        <Text style={styles.buttonText}>Cadastrar</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
-  scrollContent: {
-    flexGrow: 1,
     padding: 20,
-    paddingTop: 60,
-  },
-  backButton: {
-    position: 'absolute',
-    top: 20,
-    left: 20,
+    justifyContent: 'center',
+    backgroundColor: '#f7f7f7',
   },
   title: {
-    fontSize: 28,
+    fontSize: width < 400 ? 24 : 28, // Ajustando o tamanho do texto com base na largura da tela
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 30,
@@ -187,39 +150,47 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flexDirection: 'row',
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    marginVertical: 10,
     alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
-    marginBottom: 20,
-  },
-  inputIcon: {
-    marginRight: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
   input: {
     flex: 1,
-    height: 40,
+    padding: 10,
     fontSize: 16,
   },
-  inputError: {
-    borderBottomColor: 'red',
-    borderBottomWidth: 1,
+  eyeIcon: {
+    padding: 10,
   },
-  signupButton: {
-    backgroundColor: '#266951',
+  button: {
+    backgroundColor: '#53a65b',
     padding: 15,
-    borderRadius: 8,
-    alignItems: 'center',
+    borderRadius: 10,
     marginTop: 20,
+    alignItems: 'center',
+    elevation: 3,
   },
   buttonText: {
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
   },
-  loginText: {
-    color: '#266951',
+  errorText: {
+    color: 'red',
     textAlign: 'center',
-    marginTop: 20,
-    fontSize: 16,
+    marginVertical: 10,
+  },
+  headerImage: {
+    width: '100%',
+    height: 200,
+    resizeMode: 'contain',
+    marginBottom: 20,
   },
 });

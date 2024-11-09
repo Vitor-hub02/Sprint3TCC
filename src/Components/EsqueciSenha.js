@@ -1,21 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import auth from '@react-native-firebase/auth';
 
 export default function EsqueciSenha({ navigation }) {
   const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
-
-  const handleForgotPassword = async () => {
-    try {
-      await auth().sendPasswordResetEmail(email);
-      alert('Um email foi enviado para a redefinição de senha.');
-    } catch (error) {
-      console.log(error);
-      setError('Falha ao enviar o e-mail. Verifique se o e-mail está correto.');
-    }
-  };
 
   return (
     <View style={styles.container}>
@@ -27,6 +15,8 @@ export default function EsqueciSenha({ navigation }) {
         <Icon name="question-circle" size={30} color="green" />
       </TouchableOpacity>
 
+      <Image source={require('../assets/Image.png')} style={styles.headerImage} />
+
       <Text style={styles.title}>Esqueci minha senha</Text>
 
       <TextInput
@@ -37,8 +27,6 @@ export default function EsqueciSenha({ navigation }) {
         keyboardType="email-address"
         autoCapitalize="none"
       />
-
-      {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CodigoVerificacao')}>
         <Text style={styles.buttonText}>Enviar</Text>
@@ -78,7 +66,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   button: {
-    backgroundColor: '#266951',
+    backgroundColor: '#53a65b',
     padding: 15,
     borderRadius: 5,
     marginTop: 20,
@@ -88,9 +76,10 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
   },
-  errorText: {
-    color: 'red',
-    textAlign: 'center',
-    marginVertical: 10,
+  headerImage: {
+    width: '100%',
+    height: 200,
+    resizeMode: 'contain',
+    marginBottom: 20,
   },
 });

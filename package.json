@@ -19,6 +19,7 @@
     "expo": "~51.0.28",
     "expo-linear-gradient": "~13.0.2",
     "expo-status-bar": "~1.12.1",
+    "meu-tour": "file:",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.74.5",

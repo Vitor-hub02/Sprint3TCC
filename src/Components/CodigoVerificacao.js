@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const { width } = Dimensions.get('window'); // Obtendo a largura da tela
@@ -24,6 +24,12 @@ export default function CodigoVerificacao({ navigation }) {
       <TouchableOpacity style={styles.helpButton}>
         <Icon name="question-circle" size={30} color="green" />
       </TouchableOpacity>
+
+      <Image
+        source={require('../assets/autenticacao.png')} // Substitua pelo caminho da sua imagem
+        style={styles.headerImage}
+      />
+
 
       <Text style={styles.title}>Código de Verificação</Text>
 
@@ -91,7 +97,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   button: {
-    backgroundColor: '#266951',
+    backgroundColor: '#53a65b',
     padding: 15,
     borderRadius: 10,
     marginTop: 20,
@@ -102,5 +108,11 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  headerImage: {
+    width: '100%',
+    height: 200,
+    resizeMode: 'contain',
+    marginBottom: 20,
   },
 });

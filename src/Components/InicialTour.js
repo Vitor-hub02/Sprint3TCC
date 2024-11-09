@@ -144,7 +144,7 @@ const InicialTour = ({ navigation }) => {
       <View style={styles.footer}>
         {['home', 'map', 'bell', 'user'].map((icon, index) => (
           <TouchableOpacity key={index} style={styles.footerButton}>
-            <Icon name={icon} size={24} color={index === 0 ? "#4CAF50" : "#757575"} />
+            <Icon name={icon} size={24} color={index === 0 ? "#53a65b" : "#757575"} />
             <Text style={[styles.footerButtonText, index === 0 && styles.activeFooterButtonText]}>
               {icon.charAt(0).toUpperCase() + icon.slice(1)}
             </Text>

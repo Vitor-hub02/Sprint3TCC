@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, Image, StyleSheet, SafeAreaView } from 'react-native';
 
-const AUTO_CHANGE_INTERVAL = 2000;
+const AUTO_CHANGE_INTERVAL = 2000; // 2 segundos para mudar automaticamente
 
-export default function Integracao1({ navigation }) {
+export default function Integracao3({ navigation }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigation.navigate('EscolherPreferencias1');
@@ -12,24 +12,20 @@ export default function Integracao1({ navigation }) {
     return () => clearTimeout(timer);
   }, [navigation]);
 
-  const handleNext = () => {
-    navigation.navigate('Login');
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <Image source={require('../assets/Integracao3.png')} style={styles.image} />
-        <Text style={styles.title}>Aproveite cada momento enquanto cuida do meio ambiente: viagens conscientes, impactos positivos</Text>
+        <Text style={styles.title}>Descubra lugares incríveis perto de você</Text>
         <Text style={styles.description}>
-        Oferecemos dicas para minimizar o impacto ambiental
+          Oferecemos dicas para minimizar o impacto ambiental
         </Text>
       </View>
       <View style={styles.bottomContainer}>
         <View style={styles.pageIndicator}>
-          <View style={[styles.dot, styles.activeDot]} />
           <View style={styles.dot} />
           <View style={styles.dot} />
+          <View style={[styles.dot, styles.activeDot]} /> {/* A última bolinha é a ativa */}
         </View>
       </View>
     </SafeAreaView>
@@ -86,17 +82,5 @@ const styles = StyleSheet.create({
   },
   activeDot: {
     backgroundColor: '#4CAF50',
-  },
-  button: {
-    backgroundColor: '#4CAF50',
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 8,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
 });

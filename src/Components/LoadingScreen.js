@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#266951',
+    backgroundColor: '#53a65b',
   },
   loadingText: {
     marginTop: 20,

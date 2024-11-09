@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   button: {
-    backgroundColor: '#266951',
+    backgroundColor: '#53a65b',
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 30,
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   skipText: {
-    color: '#266951',
+    color: '#53a65b',
     fontSize: 16,
     fontWeight: '600',
   },

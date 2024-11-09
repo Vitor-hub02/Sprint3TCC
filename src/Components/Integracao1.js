@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, Image, StyleSheet, SafeAreaView } from 'react-native';
 
-const AUTO_CHANGE_INTERVAL = 2000; // 3 segundos para mudar automaticamente
+const AUTO_CHANGE_INTERVAL = 2000; // 2 segundos para mudar automaticamente
 
 export default function Integracao1({ navigation }) {
   useEffect(() => {
@@ -12,17 +12,13 @@ export default function Integracao1({ navigation }) {
     return () => clearTimeout(timer);
   }, [navigation]);
 
-  const handleNext = () => {
-    navigation.navigate('Integracao2');
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-        <Image source={require('../assets/integracao1.png')} style={styles.image} />
-        <Text style={styles.title}>Desbrave o mundo, presenvando o futuro</Text>
+        <Image source={require('../assets/Integracao1.png')} style={styles.image} />
+        <Text style={styles.title}>Desbrave o mundo, preservando o futuro</Text>
         <Text style={styles.description}>
-        Facilitamos suas viagens, revelando ambientes eco-friendly
+          Facilitamos suas viagens, revelando ambientes eco-friendly
         </Text>
       </View>
       <View style={styles.bottomContainer}>
@@ -86,17 +82,5 @@ const styles = StyleSheet.create({
   },
   activeDot: {
     backgroundColor: '#4CAF50',
-  },
-  button: {
-    backgroundColor: '#4CAF50',
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 8,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
 });

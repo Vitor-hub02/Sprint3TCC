@@ -2,8 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const Filtros = ({ navigation, route }) => {
-  // Pegando o meioTransporte e rotaEscolhida dos parâmetros da rota, com valores padrão
-  const { meioTransporte = 'Não selecionado', rotaEscolhida = 'Não selecionado', TipoDestino = 'Não selecionado'} = route.params || {};
+  const { meioTransporte = 'Não selecionado', rotaEscolhida = 'Não selecionado' } = route.params || {};
 
   return (
     <View style={styles.container}>
@@ -11,13 +10,13 @@ const Filtros = ({ navigation, route }) => {
         <Text style={styles.closeButtonText}>X</Text>
       </TouchableOpacity>
       
-      <Text style={styles.title}>Escolher preferências</Text>
+      <Text style={styles.title}>Filtros</Text>
       
       <TouchableOpacity 
         style={styles.filterOption}
         onPress={() => navigation.navigate('FiltroMeioTransporte')}
       >
-        <Text style={styles.optionText}>Meio de transporte</Text>
+        <Text style={styles.optionText}>Meio de Transporte</Text>
         <View style={styles.optionRightContent}>
           <Text style={styles.optionValue}>{meioTransporte}</Text>
           <Text style={styles.chevron}>›</Text>
@@ -39,7 +38,7 @@ const Filtros = ({ navigation, route }) => {
         style={styles.applyButton}
         onPress={() => navigation.navigate('InicialTour')}
       >
-        <Text style={styles.applyButtonText}>Aplicar filtros</Text>
+        <Text style={styles.applyButtonText}>Aplicar Filtros</Text>
       </TouchableOpacity>
     </View>
   );
@@ -48,21 +47,24 @@ const Filtros = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fffff',
     padding: 20,
   },
   closeButton: {
     alignSelf: 'flex-end',
     padding: 10,
+    marginBottom: 50,
   },
   closeButtonText: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
+    color: '#4CAF50',
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
     marginVertical: 20,
+    color: '#000000',
   },
   filterOption: {
     flexDirection: 'row',
@@ -70,10 +72,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
+    borderBottomColor: '#53a65b',
   },
   optionText: {
-    fontSize: 16,
+    fontSize: 18,
+    color: '#000000',
   },
   optionRightContent: {
     flexDirection: 'row',
@@ -81,7 +84,7 @@ const styles = StyleSheet.create({
   },
   optionValue: {
     fontSize: 16,
-    color: '#888',
+    color: '#555', // Cor neutra
     marginRight: 5,
   },
   chevron: {
@@ -89,7 +92,7 @@ const styles = StyleSheet.create({
     color: '#888',
   },
   applyButton: {
-    backgroundColor: '#266951',
+    backgroundColor: '#53a65b',
     padding: 15,
     borderRadius: 5,
     alignItems: 'center',
@@ -97,7 +100,7 @@ const styles = StyleSheet.create({
   },
   applyButtonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
   },
 });
