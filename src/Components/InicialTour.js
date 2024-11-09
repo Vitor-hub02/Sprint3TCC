@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 const categoryImages = {
   'Parques': require('../assets/Parques.jpg'),
-  'Museus': require('../assets/exemploMuseu.jpg'),
+  'Museu': require('../assets/exemploMuseu.jpg'),
   'Shopping': require('../assets/exemploShopping.jpeg'),
   'Teatro': require('../assets/exemploTeatro.jpg'),
   'Mercados e feiras locais': require('../assets/mercadolocal.jpeg'),
@@ -76,20 +76,24 @@ const InicialTour = ({ navigation }) => {
               onPress={() => {
                 if (category === 'Parques') {
                   navigation.navigate('Parques'); 
-                } else if (category === 'Museus') {
-                  navigation.navigate('Museus'); 
+                } else if (category === 'Museu') {
+                  navigation.navigate('Museu'); 
                 } else if (category === 'Shopping') {
                   navigation.navigate('Shopping'); // Navega para a tela Shopping
                 } else if (category === 'Teatro') {
                   navigation.navigate('Teatro'); // Navega para a tela Teatro
                 }else if (category === 'Mercados e feiras locais') {
                   navigation.navigate('Mercados'); // Navega para a tela Mercados
-                }else if (category === 'Teatros') {
-                  navigation.navigate('Teatros'); // Navega para a tela Teatros
+                }else if (category === 'Teatro') {
+                  navigation.navigate('Teatro'); // Navega para a tela Teatros
                 }
-                else if (category === 'Pet Friendly') {
-                  navigation.navigate('Pet'); // Navega para a tela pet
+                else if (category === 'Museu') {
+                  navigation.navigate('Museu'); // Navega para a tela pet
                 }
+                else if (category === 'Cinemas') {
+                  navigation.navigate('Cinemas'); // Navega para a tela pet
+                }
+                
               }}
             >
               <LinearGradient colors={['rgba(0,0,0,0.3)', 'rgba(0,0,0,0.7)']} style={styles.categoryGradient}>
