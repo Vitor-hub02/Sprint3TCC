@@ -1,8 +1,8 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { useNavigation } from '@react-navigation/native'; // Importar useNavigation
-import { Ionicons } from '@expo/vector-icons'; // Importar Ionicons
+import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
 const teaDetails = [
   {
@@ -88,44 +88,101 @@ const teaDetails = [
 ];
 
 const Teatro = () => {
-  const navigation = useNavigation(); // Usar o hook useNavigation
+  const navigation = useNavigation();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedTeatro, setSelectedTeatro] = useState(null);
+
+  const handleTeatroPress = (teatro) => {
+    setSelectedTeatro(teatro);
+    setModalVisible(true);
+  };
+
+  const handleStartRoute = () => {
+    setModalVisible(false);
+    // navegação para a tela de trajeto
+    // navigation.navigate('Trajeto', { teatro: selectedTeatro });
+  };
 
   return (
     <View style={styles.container}>
-     <TouchableOpacity 
+      <TouchableOpacity 
         style={styles.botaoVoltar} 
-        onPress={() => navigation.navigate('InicialTour')} // Navegar para InicialTour
+        onPress={() => navigation.navigate('InicialTour')}
       >
-        <Ionicons name="arrow-back" size={24} color="#FFFFFF" /> {/* Ícone de voltar */}
-      </TouchableOpacity> 
+        <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
+      </TouchableOpacity>
+      
       <ScrollView>
         {teaDetails.map((tea, index) => (
-          <View key={index} style={styles.card}>
-            <Image source={tea.image} style={styles.image} />
-            <Text style={styles.cardTitle}>{tea.title}</Text>
-            <View style={styles.infoContainer}>
-              <View style={styles.infoRow}>
-                <Icon name={tea.petsAllowed ? 'paw' : 'ban'} size={20} color={tea.petsAllowed ? '#4CAF50' : '#e74c3c'} />
-                <Text style={styles.infoText}>
-                  Pets: {tea.petsAllowed ? 'Permitido' : 'Não permitido'}
-                </Text>
+          <TouchableOpacity 
+            key={index} 
+            onPress={() => handleTeatroPress(tea)}
+          >
+            <View style={styles.card}>
+              <Image source={tea.image} style={styles.image} />
+              <Text style={styles.cardTitle}>{tea.title}</Text>
+              <View style={styles.infoContainer}>
+                <View style={styles.infoRow}>
+                  <Icon name={tea.petsAllowed ? 'paw' : 'ban'} size={20} color={tea.petsAllowed ? '#4CAF50' : '#e74c3c'} />
+                  <Text style={styles.infoText}>
+                    Pets: {tea.petsAllowed ? 'Permitido' : 'Não permitido'}
+                  </Text>
+                </View>
+                <View style={styles.infoRow}>
+                  <Icon name="clock-o" size={20} color="#666" />
+                  <Text style={styles.infoText}>Fecha às: {tea.closingTime}</Text>
+                </View>
               </View>
-              <View style={styles.infoRow}>
-                <Icon name="clock-o" size={20} color="#666" />
-                <Text style={styles.infoText}>Fecha às: {tea.closingTime}</Text>
-              </View>
+              <Text style={styles.subTitle}>Restaurantes Próximos:</Text>
+              {tea.restaurants.map((restaurant, idx) => (
+                <Text key={idx} style={styles.listItem}>{restaurant}</Text>
+              ))}
+              <Text style={styles.subTitle}>Destinos Próximos:</Text>
+              {tea.nearbyDestinations.map((destination, idx) => (
+                <Text key={idx} style={styles.listItem}>{destination}</Text>
+              ))}
             </View>
-            <Text style={styles.subTitle}>Restaurantes Próximos:</Text>
-            {tea.restaurants.map((restaurant, idx) => (
-              <Text key={idx} style={styles.listItem}>{restaurant}</Text>
-            ))}
-            <Text style={styles.subTitle}>Destinos Próximos:</Text>
-            {tea.nearbyDestinations.map((destination, idx) => (
-              <Text key={idx} style={styles.listItem}>{destination}</Text>
-            ))}
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Deseja iniciar trajeto?</Text>
+            <Text style={styles.modalSubtitle}>{selectedTeatro?.title}</Text>
+            
+            <TouchableOpacity 
+              style={[styles.modalButton, styles.startButton]}
+              onPress={handleStartRoute}
+            >
+              <Text style={styles.modalButtonText}>Iniciar trajeto</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={[styles.modalButton, styles.closeButton]}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.modalButtonText}>Voltar para Teatros</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={[styles.modalButton, styles.homeButton]}
+              onPress={() => {
+                setModalVisible(false);
+                navigation.navigate('InicialTour');
+              }}
+            >
+              <Text style={styles.modalButtonText}>Voltar para Início</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -188,8 +245,56 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     marginBottom: 10,
-    flexDirection: 'row', // Para alinhar o ícone
-    justifyContent: 'flex-start', // Alinhar à esquerda
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 20,
+    width: '80%',
+    alignItems: 'center',
+    elevation: 5,
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#266951',
+    textAlign: 'center',
+  },
+  modalSubtitle: {
+    fontSize: 18,
+    marginBottom: 20,
+    color: '#333',
+    textAlign: 'center',
+  },
+  modalButton: {
+    width: '100%',
+    padding: 15,
+    borderRadius: 10,
+    marginVertical: 5,
+    alignItems: 'center',
+  },
+  startButton: {
+    backgroundColor: '#266951',
+  },
+  closeButton: {
+    backgroundColor: '#757575',
+  },
+  homeButton: {
+    backgroundColor: '#ff3b3b',
+  },
+  modalButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

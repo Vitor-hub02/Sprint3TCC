@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, Image, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const { width } = Dimensions.get('window'); // Obtendo a largura da tela
+const { width } = Dimensions.get('window');
 
 export default function Cadastro2({ navigation }) {
   const [name, setName] = useState('');
@@ -12,6 +12,7 @@ export default function Cadastro2({ navigation }) {
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false); // Estado para controlar o modal
 
   const validatePassword = (password) => {
     const lengthValid = password.length >= 8 && password.length <= 70;
@@ -64,8 +65,7 @@ export default function Cadastro2({ navigation }) {
     }
 
     try {
-      alert('Usuário cadastrado com sucesso!');
-      navigation.navigate('Login'); // Navega para a tela de Login
+      setModalVisible(true); // Abre o modal de sucesso
     } catch (error) {
       setError('Erro ao cadastrar o usuário. Tente novamente.');
     }
@@ -74,7 +74,7 @@ export default function Cadastro2({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../assets/cadastro.png')} // Substitua pelo caminho da sua imagem
+        source={require('../assets/cadastro.png')}
         style={styles.headerImage}
       />
       <Text style={styles.title}>Cadastro</Text>
@@ -130,6 +130,29 @@ export default function Cadastro2({ navigation }) {
       <TouchableOpacity style={styles.button} onPress={handleSignUp}>
         <Text style={styles.buttonText}>Cadastrar</Text>
       </TouchableOpacity>
+
+      {/* Modal para mensagem de sucesso */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>Usuário cadastrado com sucesso!</Text>
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={() => {
+                setModalVisible(false);
+                navigation.navigate('Login'); // Navega para a tela de Login
+              }}
+            >
+              <Text style={styles.buttonText}>OK</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -142,7 +165,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f7f7f7',
   },
   title: {
-    fontSize: width < 400 ? 24 : 28, // Ajustando o tamanho do texto com base na largura da tela
+    fontSize: width < 400 ? 24 : 28,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 30,
@@ -192,5 +215,27 @@ const styles = StyleSheet.create({
     height: 200,
     resizeMode: 'contain',
     marginBottom: 20,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Fundo semi-transparente
+  },
+  modalContent: {
+    width: '80%',
+    padding: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  modalButton: {
+    backgroundColor: '#53a65b',
+    padding: 10,
+    borderRadius: 5,
   },
 });

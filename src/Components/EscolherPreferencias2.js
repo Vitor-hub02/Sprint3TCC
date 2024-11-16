@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView, Modal, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+const { width } = Dimensions.get('window');
+
 const opcoesCulinaria = [
-  { id: 1, texto: 'Vegetariana', icone: 'leaf' },
-  { id: 2, texto: 'Regional brasileira', icone: 'restaurant' },
-  { id: 3, texto: 'Orgânica e sustentável', icone: 'nutrition' },
-  { id: 4, texto: 'Comida de rua', icone: 'cart' },
-  { id: 5, texto: 'Internacional (ex: italiana)', icone: 'globe' },
+  { id: 1, texto: 'Lanches', icone: 'fast-food-outline' },
+  { id: 2, texto: 'Massas', icone: 'pizza-outline' },
+  { id: 3, texto: 'Doces e bolos', icone: 'restaurant-outline' },
+  { id: 4, texto: 'Sorvete e açaí', icone: 'ice-cream-outline' },
 ];
 
 const EscolherPreferencias2 = ({ navigation }) => {
   const [selecoes, setSelecoes] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const toggleSelecao = (id) => {
     setSelecoes(prevSelecoes => 
@@ -23,9 +25,9 @@ const EscolherPreferencias2 = ({ navigation }) => {
 
   const handleContinuar = () => {
     if (selecoes.length === 0) {
-      alert('Por favor, selecione pelo menos uma preferência para continuar.');
+      setModalVisible(true);
     } else {
-      navigation.navigate('EscolherPreferencias3');
+      navigation.navigate('Login');
     }
   };
 
@@ -33,13 +35,14 @@ const EscolherPreferencias2 = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={24} color="#4A4A4A" />
+          <Ionicons name="arrow-back" size={24} color="#53a65b" />
         </TouchableOpacity>
         <Text style={styles.titulo}>
-          Quais tipos de culinária você prefere e costuma experimentar durante suas saídas ou viagens na cidade?
+          O que você costuma comer em seus passeios?
         </Text>
         <View style={{ width: 24 }} />
       </View>
+      
       <ScrollView contentContainerStyle={styles.scrollView}>
         {opcoesCulinaria.map((opcao) => (
           <TouchableOpacity
@@ -63,8 +66,29 @@ const EscolherPreferencias2 = ({ navigation }) => {
         style={styles.botaoContinuar}
         onPress={handleContinuar}
       >
-        <Text style={styles.botaoContinuarTexto}>Continuar</Text>
+        <Text style={styles.botaoContinuarTexto}>Finalizar</Text>
       </TouchableOpacity>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>
+              Por favor, selecione pelo menos uma preferência para continuar.
+            </Text>
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.buttonText}>OK</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 };
@@ -83,10 +107,10 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   titulo: {
-    fontSize: 18,
+    fontSize: width < 400 ? 16 : 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    flex: 1, // Permite que o título ocupe o espaço disponível
+    flex: 1,
   },
   scrollView: {
     paddingTop: 20,
@@ -119,6 +143,37 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   botaoContinuarTexto: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    width: '80%',
+    padding: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+    fontSize: 16,
+    color: '#333',
+  },
+  modalButton: {
+    backgroundColor: '#53a65b',
+    padding: 10,
+    borderRadius: 5,
+    minWidth: 100,
+    alignItems: 'center',
+  },
+  buttonText: {
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold',

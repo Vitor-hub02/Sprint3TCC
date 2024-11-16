@@ -10,18 +10,8 @@ const Filtros = ({ navigation, route }) => {
         <Text style={styles.closeButtonText}>X</Text>
       </TouchableOpacity>
       
-      <Text style={styles.title}>Filtros</Text>
+      <Text style={styles.title}>Iniciar Trajeto</Text>
       
-      <TouchableOpacity 
-        style={styles.filterOption}
-        onPress={() => navigation.navigate('FiltroMeioTransporte')}
-      >
-        <Text style={styles.optionText}>Meio de Transporte</Text>
-        <View style={styles.optionRightContent}>
-          <Text style={styles.optionValue}>{meioTransporte}</Text>
-          <Text style={styles.chevron}>›</Text>
-        </View>
-      </TouchableOpacity>
       
       <TouchableOpacity 
         style={styles.filterOption}
@@ -30,6 +20,17 @@ const Filtros = ({ navigation, route }) => {
         <Text style={styles.optionText}>Escolher Rotas</Text>
         <View style={styles.optionRightContent}>
           <Text style={styles.optionValue}>{rotaEscolhida}</Text>
+          <Text style={styles.chevron}>›</Text>
+        </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity 
+        style={styles.filterOption}
+        onPress={() => navigation.navigate('FiltroMeioTransporte')}
+      >
+        <Text style={styles.optionText}>Meio de Transporte</Text>
+        <View style={styles.optionRightContent}>
+          <Text style={styles.optionValue}>{meioTransporte}</Text>
           <Text style={styles.chevron}>›</Text>
         </View>
       </TouchableOpacity>

@@ -68,7 +68,7 @@ export default function Login({ navigation }) {
         style={styles.content}
       >
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Icon name="arrow-left" size={24} color="#333" />
+          <Icon name="arrow-left" size={24} color="#53a65b" />
         </TouchableOpacity>
 
         <Text style={styles.title}>Bem-vindo</Text>
@@ -121,7 +121,7 @@ export default function Login({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Cadastro1')}>
           <Text style={styles.registerText}>Não possui conta? <Text style={styles.registerTextBold}>Criar conta</Text></Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>

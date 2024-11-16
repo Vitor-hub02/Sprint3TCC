@@ -4,9 +4,8 @@ import { MaterialIcons } from '@expo/vector-icons'; // Para ícones
 
 const opcoesMeioTransporte = [
   { id: 'bicicleta', label: 'Bicicleta', icon: 'directions-bike' },
-  { id: 'trens', label: 'Trens', icon: 'train' },
+  { id: 'transporte_publico', label: 'Transporte Público', icon: 'train' },
   { id: 'carro', label: 'Carro', icon: 'directions-car' },
-  { id: 'onibus', label: 'Ônibus', icon: 'directions-bus' },
   { id: 'ape', label: 'A pé', icon: 'directions-walk' },
 ];
 

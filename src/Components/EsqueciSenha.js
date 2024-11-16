@@ -7,12 +7,12 @@ export default function EsqueciSenha({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Icon name="arrow-left" size={30} color="green" />
+      <TouchableOpacity style={[styles.backButton, { marginTop: 20 }]} onPress={() => navigation.goBack()}>
+        <Icon name="arrow-left" size={30} color="#53a65b" />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.helpButton}>
-        <Icon name="question-circle" size={30} color="green" />
+      <TouchableOpacity style={[styles.helpButton, { marginTop: 20 }]} onPress={() => navigation.navigate('CentralAjuda')}>
+        <Icon name="question-circle" size={30} color="#53a65b" />
       </TouchableOpacity>
 
       <Image source={require('../assets/Image.png')} style={styles.headerImage} />

@@ -21,7 +21,7 @@ export default function Cadastro1({ navigation }) {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Icon name="arrow-left" size={24} color="#333" />
+          <Icon name="arrow-left" size={24} color="#53a65b" />
         </TouchableOpacity>
 
         <View style={styles.content}>

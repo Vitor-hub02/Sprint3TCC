@@ -32,6 +32,10 @@ import Museu from './src/Components/Museu';
 import Shopping from './src/Components/Shopping';
 import Teatro from './src/Components/Teatro';
 import Cinemas from './src/Components/Cinemas';
+import Configuracoes from './src/Components/Configuracoes';
+import PoliticaPrivacidade from './src/Components/PoliticaPrivacidade';
+import Sobre from './src/Components/Sobre';
+import CentralAjuda from './src/Components/CentralAjuda';
 // Importando as novas telas
 
 const Stack = createNativeStackNavigator();
@@ -57,7 +61,7 @@ function App() {
           options={{ headerShown: false }} 
         />
         <Stack.Screen 
-          name="Cadastro" 
+          name="Cadastro1" 
           component={Cadastro1} 
           options={{ headerShown: false }} 
         />
@@ -191,6 +195,27 @@ function App() {
           component={Cinemas} 
           options={{ headerShown: false }} 
         />
+        <Stack.Screen 
+          name="Configuracoes" 
+          component={Configuracoes} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="PoliticaPrivacidade" 
+          component={PoliticaPrivacidade} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Sobre" 
+          component={Sobre} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="CentralAjuda" 
+          component={CentralAjuda} 
+          options={{ headerShown: false }} 
+        />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

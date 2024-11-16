@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView, Image, TextInput, Modal } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView, Image, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -12,60 +12,38 @@ const categoryImages = {
   'Cinemas': require('../assets/exemploCinema.jpg'),
 };
 
-/*Essas imagens precisam ser trocadas SP */
 const destinationImages = {
   'Parque Ibirapuera': require('../assets/ParqueIbirapuera.jpg'),
   'Aquário de São Paulo': require('../assets/Aquario.jpg')
 };
 
-const experienceImages = {
-  'Trilha ecológica': require('../assets/trilha-ecologica.jpeg'),
-  'Observação de aves': require('../assets/observacao_de_aves.jpeg'),
-  'Turismo rural': require('../assets/Turismo-rural.jpg')
-};
-
 const InicialTour = ({ navigation }) => {
-  const [isProfileVisible, setIsProfileVisible] = useState(false);
-  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
-  const handleDeleteAccount = () => {
-    // Implementar a lógica de exclusão de conta aqui
-    setIsDeleteModalVisible(false);
-    setIsProfileVisible(false);
-  };
-
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient colors={['#266951', '#2E7D32']} style={styles.header}>
-        <Text style={styles.headerTitle}>TourGuide</Text>
+      <View style={[styles.header, { backgroundColor: '#53a65b' }]}>
+        <Image source={require('../assets/Logotipo1.png')} style={styles.logo} />
         <View style={styles.headerIcons}>
           <TouchableOpacity onPress={() => navigation.navigate('Filtros')} style={styles.headerIcon}>
             <Icon name="filter" size={24} color="#fff" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setIsProfileVisible(true)} style={styles.headerIcon}>
-            <Icon name="user-circle" size={30} color="#fff" />
+          <TouchableOpacity onPress={() => navigation.navigate('Configuracoes')} style={styles.headerIcon}>
+            <Icon name="cog" size={24} color="#fff" />
           </TouchableOpacity>
         </View>
-      </LinearGradient>
+      </View>
 
       <ScrollView style={styles.content}>
         <View style={styles.searchBar}>
           <Icon name="search" size={20} color="#666" />
           <TextInput 
             style={styles.searchInput}
-            placeholder="Explore destinos sustentáveis..."
+            placeholder="Pesquisar destinos..."
             placeholderTextColor="#999"
           />
         </View>
 
         <View style={styles.categoriesHeader}>
           <Text style={styles.sectionTitle}>Suas preferências de destinos</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Categorias')}>
-          <Text style={styles.seeAllText}>Ver todas</Text>
-        </TouchableOpacity>
         </View>
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoriesContainer}>
@@ -79,21 +57,14 @@ const InicialTour = ({ navigation }) => {
                 } else if (category === 'Museu') {
                   navigation.navigate('Museu'); 
                 } else if (category === 'Shopping') {
-                  navigation.navigate('Shopping'); // Navega para a tela Shopping
+                  navigation.navigate('Shopping'); 
                 } else if (category === 'Teatro') {
-                  navigation.navigate('Teatro'); // Navega para a tela Teatro
-                }else if (category === 'Mercados e feiras locais') {
-                  navigation.navigate('Mercados'); // Navega para a tela Mercados
-                }else if (category === 'Teatro') {
-                  navigation.navigate('Teatro'); // Navega para a tela Teatros
+                  navigation.navigate('Teatro'); 
+                } else if (category === 'Mercados e feiras locais') {
+                  navigation.navigate('Mercados'); 
+                } else if (category === 'Cinemas') {
+                  navigation.navigate('Cinemas'); 
                 }
-                else if (category === 'Museu') {
-                  navigation.navigate('Museu'); // Navega para a tela pet
-                }
-                else if (category === 'Cinemas') {
-                  navigation.navigate('Cinemas'); // Navega para a tela pet
-                }
-                
               }}
             >
               <LinearGradient colors={['rgba(0,0,0,0.3)', 'rgba(0,0,0,0.7)']} style={styles.categoryGradient}>
@@ -113,9 +84,9 @@ const InicialTour = ({ navigation }) => {
               style={styles.destinationItem} 
               onPress={() => {
                 if (place === 'Parque Ibirapuera') {
-                  navigation.navigate('ParqueIbirapuera'); // Navega para ParqueIbirapuera.js
+                  navigation.navigate('ParqueIbirapuera'); 
                 } else if (place === 'Aquário de São Paulo') {
-                  navigation.navigate('Aquario'); // Navega para Aquario.js
+                  navigation.navigate('Aquario'); 
                 }
               }}
             >
@@ -127,22 +98,10 @@ const InicialTour = ({ navigation }) => {
             </TouchableOpacity>
           ))}
         </View>
-
-        <Text style={styles.sectionTitle}>Experiências sustentáveis</Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.experiencesContainer}>
-          {Object.keys(experienceImages).map((experience, index) => (
-            <TouchableOpacity key={index} style={styles.experienceItem}>
-              <Image source={experienceImages[experience]} style={styles.experienceImage} />
-              <View style={styles.experienceTextContainer}>
-                <Text style={styles.experienceText}>{experience}</Text>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
       </ScrollView>
 
       <View style={styles.footer}>
-        {['home', 'map', 'bell', 'user'].map((icon, index) => (
+        {['home', 'map',].map((icon, index) => (
           <TouchableOpacity key={index} style={styles.footerButton}>
             <Icon name={icon} size={24} color={index === 0 ? "#53a65b" : "#757575"} />
             <Text style={[styles.footerButtonText, index === 0 && styles.activeFooterButtonText]}>
@@ -151,79 +110,6 @@ const InicialTour = ({ navigation }) => {
           </TouchableOpacity>
         ))}
       </View>
-
-      {/* Tela lateral do perfil */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={isProfileVisible}
-        onRequestClose={() => setIsProfileVisible(false)}
-      >
-        <View style={styles.profileContainer}>
-          <Text style={styles.profileTitle}>Perfil do Usuário</Text>
-          <TextInput
-            style={styles.profileInput}
-            placeholder="E-mail"
-            value={email}
-            onChangeText={setEmail}
-            editable={false}
-          />
-          <TextInput
-            style={styles.profileInput}
-            placeholder="Senha"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-          />
-          <TextInput
-            style={styles.profileInput}
-            placeholder="Confirmar Senha"
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
-            secureTextEntry
-          />
-          <TouchableOpacity style={styles.profileButton}>
-            <Text style={styles.profileButtonText}>Atualizar Dados Cadastrais</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.profileButton, { backgroundColor: '#e74c3c' }]}
-            onPress={() => setIsDeleteModalVisible(true)}
-          >
-            <Text style={styles.profileButtonText}>Excluir Conta</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setIsProfileVisible(false)}>
-            <Text style={styles.closeProfileText}>Fechar</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
-
-      {/* Modal de confirmação de exclusão */}
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={isDeleteModalVisible}
-        onRequestClose={() => setIsDeleteModalVisible(false)}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalText}>Deseja realmente excluir sua conta?</Text>
-            <View style={styles.modalButtons}>
-              <TouchableOpacity
-                style={[styles.modalButton, { backgroundColor: '#e74c3c' }]}
-                onPress={handleDeleteAccount}
-              >
-                <Text style={styles.modalButtonText}>Sim</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.modalButton}
-                onPress={() => setIsDeleteModalVisible(false)}
-              >
-                <Text style={styles.modalButtonText}>Não</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
     </SafeAreaView>
   );
 };
@@ -240,11 +126,6 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingTop: 50,
     paddingBottom: 20,
-  },
-  headerTitle: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#fff',
   },
   headerIcons: {
     flexDirection: 'row',
@@ -287,11 +168,6 @@ const styles = StyleSheet.create({
     marginTop: 25,
     marginBottom: 15,
     color: '#333',
-  },
-  seeAllText: {
-    color: '#266951',
-    fontSize: 16,
-    fontWeight: '600',
   },
   categoriesContainer: {
     marginBottom: 25,
@@ -358,36 +234,6 @@ const styles = StyleSheet.create({
     color: '#eee',
     marginTop: 5,
   },
-  experiencesContainer: {
-    marginBottom: 30,
-  },
-  experienceItem: {
-    marginRight: 25,
-    width: 250,
-    borderRadius: 20,
-    overflow: 'hidden',
-    backgroundColor: '#fff',
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-  },
-  experienceImage: {
-    width: 250,
-    height: 180,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-  },
-  experienceTextContainer: {
-    padding: 15,
-  },
-  experienceText: {
-    textAlign: 'center',
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-  },
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -408,69 +254,10 @@ const styles = StyleSheet.create({
     color: '#4CAF50',
     fontWeight: 'bold',
   },
-  profileContainer: {
-    flex: 1,
-    backgroundColor: 'white',
-    padding: 20,
-    width: '80%',
-    alignSelf: 'flex-end',
-  },
-  profileTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  profileInput: {
-    borderWidth: 1,
-    borderColor: '#ddd',
-    padding: 10,
-    marginBottom: 10,
-    borderRadius: 5,
-  },
-  profileButton: {
-    backgroundColor: '#266951',
-    padding: 15,
-    borderRadius: 5,
-    alignItems: 'center',
-    marginTop: 10,
-  },
-  profileButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
-  },
-  closeProfileText: {
-    color: '#266951',
-    marginTop: 20,
-    textAlign: 'center',
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  modalContent: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-    alignItems: 'center',
-  },
-  modalText: {
-    fontSize: 18,
-    marginBottom: 20,
-  },
-  modalButtons: {
-    flexDirection: 'row',
-  },
-  modalButton: {
-    padding: 10,
-    marginHorizontal: 10,
-    borderRadius: 5,
-    backgroundColor: '#4CAF50',
-  },
-  modalButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
+  logo: {
+    width: 200, 
+    height: 100,
+    resizeMode: 'contain', // para manter a proporção
   },
 });
 

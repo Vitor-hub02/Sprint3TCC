@@ -64,6 +64,11 @@ const EscolherRota = ({ navigation }) => {
             placeholderTextColor="#fffff"
             onSubmitEditing={confirmarRota}
           />
+          <TouchableOpacity 
+            style={styles.filterOption}
+            onPress={() => navigation.navigate('FiltroMeioTransporte')}
+          ></TouchableOpacity>
+          
           {sugestoes.length > 0 && (
             <FlatList
               data={sugestoes}
@@ -75,6 +80,7 @@ const EscolherRota = ({ navigation }) => {
               )}
               style={styles.suggestionList}
             />
+            
           )}
         </View>
       </KeyboardAvoidingView>
@@ -151,6 +157,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
     backgroundColor: '#f9f9f9',
+  },
+  filterOption: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#53a65b',
   },
 });
 
