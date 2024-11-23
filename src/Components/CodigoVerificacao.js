@@ -34,7 +34,7 @@ export default function CodigoVerificacao({ navigation }) {
       <Text style={styles.title}>Código de Verificação</Text>
 
       <Text style={styles.description}>
-        Um email foi enviado para seu endereço com um código de verificação. Insira-o abaixo para continuar.
+      Um código de verificação foi enviado no seu endereço de e-mail. Insira-o abaixo para continuar.
       </Text>
 
       <TextInput
